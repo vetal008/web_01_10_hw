@@ -1,0 +1,33 @@
+{% extends 'quotes/base.html' %}
+{% load extract %}
+
+{% block content %}
+<div class="container mt-3">
+    {% if form.errors or form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ form.errors }}
+    </div>
+    {% endif %}
+
+    <form action="{% url 'quotes:add_author' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="authorFullname" class="form-label">Input Author name</label>
+            {{ form.author_fullname }}
+        </div>
+        <div class="mb-3">
+            <label for="bornDate" class="form-label">Input Date of birth of Author</label>
+            {{ form.born_date }}
+        </div>
+        <div class="mb-3">
+            <label for="bornLocation" class="form-label">Input birth Location</label>
+            {{ form.born_location }}
+        </div>
+        <div class="mb-3">
+            <label for="formDesription" class="form-label">Author Description</label>
+            {{ form.description }}
+        </div>
+        <button type="submit" class="btn btn-primary">Add Author</button>
+    </form>
+</div>
+{% endblock %}
